@@ -1,0 +1,11 @@
+{
+  "author": "Victor Wolmeister",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "express": "pnpm --filter @node-web-frameworks-performance/express-app",
+    "fastify": "pnpm --filter @node-web-frameworks-performance/fastify-app",
+    "hapi": "pnpm --filter @node-web-frameworks-performance/hapi-app"
+  },
+  "devDependencies": {}
+}

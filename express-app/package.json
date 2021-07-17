@@ -1,0 +1,12 @@
+{
+  "name": "@node-web-frameworks-performance/express-app",
+  "author": "Victor Wolmeister",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
