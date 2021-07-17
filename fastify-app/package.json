@@ -1,12 +1,18 @@
 {
-  "name": "@node-web-frameworks-performance/hapi-app",
+  "name": "@node-web-frameworks-performance/fastify-app",
   "author": "Victor Wolmeister",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc --build",
+    "start": "node dist/index.js"
+  },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "^16.3.3",
+    "typescript": "^4.3.5"
+  }
 }

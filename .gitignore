@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Debug
+tsconfig.tsbuildinfo
+
+# Production
+dist/
+
+# Local files
+*.local
+.env
