@@ -3,13 +3,15 @@ lockfileVersion: 5.3
 importers:
 
   .:
-    specifiers: {}
+    specifiers:
+      autocannon: ^7.4.0
+    devDependencies:
+      autocannon: 7.4.0
 
   express-app:
     specifiers:
       '@types/express': ^4.17.13
       '@types/node': ^16.3.3
-      autocannon: ^7.4.0
       express: ^4.17.1
       ts-node-dev: ^1.1.8
       typescript: ^4.3.5
@@ -18,14 +20,12 @@ importers:
     devDependencies:
       '@types/express': 4.17.13
       '@types/node': 16.3.3
-      autocannon: 7.4.0
       ts-node-dev: 1.1.8_typescript@4.3.5
       typescript: 4.3.5
 
   fastify-app:
     specifiers:
       '@types/node': ^16.3.3
-      autocannon: ^7.4.0
       fastify: ^3.19.1
       ts-node-dev: ^1.1.8
       typescript: ^4.3.5
@@ -33,7 +33,6 @@ importers:
       fastify: 3.19.1
     devDependencies:
       '@types/node': 16.3.3
-      autocannon: 7.4.0
       ts-node-dev: 1.1.8_typescript@4.3.5
       typescript: 4.3.5
 
@@ -42,7 +41,6 @@ importers:
       '@hapi/hapi': ^20.1.5
       '@types/hapi__hapi': ^20.0.9
       '@types/node': ^16.3.3
-      autocannon: ^7.4.0
       ts-node-dev: ^1.1.8
       typescript: ^4.3.5
     dependencies:
@@ -50,7 +48,6 @@ importers:
     devDependencies:
       '@types/hapi__hapi': 20.0.9
       '@types/node': 16.3.3
-      autocannon: 7.4.0
       ts-node-dev: 1.1.8_typescript@4.3.5
       typescript: 4.3.5
 

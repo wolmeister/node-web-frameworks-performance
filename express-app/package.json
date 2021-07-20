@@ -9,8 +9,7 @@
   "scripts": {
     "build": "tsc --build",
     "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only --clear src/index.ts",
-    "benchmark": "autocannon http://localhost:3000/health"
+    "dev": "ts-node-dev --respawn --transpile-only --clear src/index.ts"
   },
   "dependencies": {
     "express": "^4.17.1"
@@ -18,7 +17,6 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^16.3.3",
-    "autocannon": "^7.4.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
   }

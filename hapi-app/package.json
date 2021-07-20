@@ -9,8 +9,7 @@
   "scripts": {
     "build": "tsc --build",
     "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only --clear src/index.ts",
-    "benchmark": "autocannon http://localhost:3000/health"
+    "dev": "ts-node-dev --respawn --transpile-only --clear src/index.ts"
   },
   "dependencies": {
     "@hapi/hapi": "^20.1.5"
@@ -18,7 +17,6 @@
   "devDependencies": {
     "@types/hapi__hapi": "^20.0.9",
     "@types/node": "^16.3.3",
-    "autocannon": "^7.4.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
   }
