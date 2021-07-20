@@ -1,0 +1,22 @@
+{
+  "name": "@node-web-frameworks-performance/shared",
+  "author": "Victor Wolmeister",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "rimraf dist && tsc --build && copyfiles migrations/* dist"
+  },
+  "dependencies": {
+    "postgres-migrations": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.3.3",
+    "@types/pg": "^8.6.1",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.5"
+  }
+}
