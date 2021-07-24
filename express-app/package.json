@@ -12,8 +12,9 @@
     "dev": "ts-node-dev --respawn --transpile-only --clear src/index.ts"
   },
   "dependencies": {
+    "@node-web-frameworks-performance/shared": "workspace:../shared",
     "express": "^4.17.1",
-    "@node-web-frameworks-performance/shared": "workspace:../shared"
+    "http-status-codes": "^2.1.4"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
