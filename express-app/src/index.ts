@@ -1,5 +1,6 @@
 import express, { ErrorRequestHandler } from 'express';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import { ValidationError } from 'joi';
 import {
   HttpError,
   runMigrations,
@@ -34,6 +35,12 @@ const start = async () => {
       res.status(err.statusCode).send({
         message: err.message,
         status: err.statusCode,
+      });
+    } else if (err instanceof ValidationError) {
+      res.status(StatusCodes.BAD_REQUEST).send({
+        message: err.message,
+        status: StatusCodes.BAD_REQUEST,
+        errors: err.details,
       });
     } else {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
