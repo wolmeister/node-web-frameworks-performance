@@ -10,13 +10,7 @@ import { isAuthenticated } from './common/auth-middleware';
 
 const start = async () => {
   // Run databaes migrations
-  // @TODO: Add .env
-  await runMigrations({
-    database: 'benchmark-express-app',
-    user: 'postgres',
-    password: 'postgres',
-    host: '192.168.0.3',
-  });
+  await runMigrations();
 
   // Run express
   const app = express();

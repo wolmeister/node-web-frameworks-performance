@@ -10,14 +10,17 @@
     "build": "rimraf dist && tsc --build && copyfiles migrations/* dist"
   },
   "dependencies": {
+    "convict": "^5.2.1",
     "ioredis": "^4.27.6",
     "jsonwebtoken": "^8.5.1",
+    "pg": "^8.6.0",
     "postgres-migrations": "^5.3.0"
   },
   "peerDependencies": {
     "http-status-codes": "^2.1.4"
   },
   "devDependencies": {
+    "@types/convict": "^6.1.1",
     "@types/ioredis": "^4.26.6",
     "@types/jsonwebtoken": "^8.5.4",
     "@types/node": "^16.3.3",
