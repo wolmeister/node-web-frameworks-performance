@@ -7,6 +7,7 @@ import {
 } from '@node-web-frameworks-performance/shared';
 
 import { isAuthenticated } from './common/auth-middleware';
+import { userRouter } from './modules/user/user-router';
 
 const start = async () => {
   // Run databaes migrations
@@ -14,6 +15,7 @@ const start = async () => {
 
   // Run express
   const app = express();
+  app.use(express.json());
 
   app.get('/health', isAuthenticated, (req, res) => {
     res.json({
@@ -22,6 +24,8 @@ const start = async () => {
       timestamp: new Date().toISOString(),
     });
   });
+
+  app.use('/', userRouter);
 
   // Setup error handling
   const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
@@ -37,6 +41,7 @@ const start = async () => {
         errors: err.details,
       });
     } else {
+      console.error(err);
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
         message: ReasonPhrases.INTERNAL_SERVER_ERROR,
         status: StatusCodes.INTERNAL_SERVER_ERROR,
