@@ -4,9 +4,9 @@ import { compare } from 'bcryptjs';
 import { StatusCodes } from 'http-status-codes';
 
 import { dbPool } from '../db';
-import { User } from '../schemas/user-schema';
 import { HttpError } from '../http-error';
 import { blacklistJwt, signJwt } from '../jwt';
+import { User } from './user-api';
 
 type AuthRequest = {
   email: string;
@@ -32,7 +32,8 @@ const revokeTokenRequestSchema = Joi.object<RevokeTokenRequest>({
 
 /**
  * Creates a JWT token for the user.
- * If the credentials are invalid, a exception will be thrown.
+ *
+ * If the credentials are invalid, an exception will be thrown.
  * @param authRequest The user credentials
  * @returns The JWT token
  */
@@ -58,6 +59,7 @@ async function authenticate(authRequest: AuthRequest): Promise<AuthResponse> {
 
 /**
  * Revokes the JWT token.
+ *
  * If the token is invalid or already expired. nothing happens.
  * @param revokeTokenRequest The token to revoke
  */

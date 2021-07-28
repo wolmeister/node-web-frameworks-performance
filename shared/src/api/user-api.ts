@@ -1,13 +1,39 @@
 import { DatabaseError } from 'pg';
 import sql from 'sql-template-strings';
+import Joi from 'joi';
 import { hash } from 'bcryptjs';
 import { StatusCodes } from 'http-status-codes';
 
-import { CreateUser, User } from '../schemas/user-schema';
 import { dbPool } from '../db';
 import { HttpError } from '../http-error';
 
-export async function addUser(user: CreateUser): Promise<User> {
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+};
+
+type NewUser = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+const newUserSchema = Joi.object<NewUser>({
+  name: Joi.string().required(),
+  email: Joi.string().required().email(),
+  password: Joi.string().required().min(6),
+}).required();
+
+/**
+ * Adds a new user.
+ *
+ * If the email has already been taken, an exception will be thrown.
+ * @param user The user to add
+ * @returns The new user
+ */
+async function addUser(user: NewUser): Promise<User> {
   try {
     const hashedPassword = await hash(user.password, 12);
 
@@ -30,3 +56,7 @@ export async function addUser(user: CreateUser): Promise<User> {
     throw err;
   }
 }
+
+export type { User, NewUser };
+export { newUserSchema };
+export const UserApi = { addUser };

@@ -8,7 +8,7 @@ import {
 
 import { isAuthenticated } from './common/auth-middleware';
 import { authRouter } from './modules/auth';
-import { userRouter } from './modules/user/user-router';
+import { userRouter } from './modules/user';
 
 const start = async () => {
   // Run databaes migrations
