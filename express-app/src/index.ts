@@ -7,6 +7,7 @@ import {
 } from '@node-web-frameworks-performance/shared';
 
 import { isAuthenticated } from './common/auth-middleware';
+import { authRouter } from './modules/auth';
 import { userRouter } from './modules/user/user-router';
 
 const start = async () => {
@@ -25,6 +26,7 @@ const start = async () => {
     });
   });
 
+  app.use('/', authRouter);
   app.use('/', userRouter);
 
   // Setup error handling
