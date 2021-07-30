@@ -1,13 +1,10 @@
 import express, { ErrorRequestHandler } from 'express';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { ValidationError } from 'joi';
-import {
-  HttpError,
-  runMigrations,
-} from '@node-web-frameworks-performance/shared';
+import { HttpError, runMigrations } from '@node-web-frameworks-performance/shared';
 
-import { isAuthenticated } from './common/auth-middleware';
 import { authRouter } from './modules/auth';
+import { productRouter } from './modules/product';
 import { userRouter } from './modules/user';
 
 const start = async () => {
@@ -18,7 +15,7 @@ const start = async () => {
   const app = express();
   app.use(express.json());
 
-  app.get('/health', isAuthenticated, (req, res) => {
+  app.get('/health', (req, res) => {
     res.json({
       message: 'OK',
       uptime: process.uptime(),
@@ -27,6 +24,7 @@ const start = async () => {
   });
 
   app.use('/', authRouter);
+  app.use('/', productRouter);
   app.use('/', userRouter);
 
   // Setup error handling

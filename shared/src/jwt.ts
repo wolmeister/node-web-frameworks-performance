@@ -1,7 +1,7 @@
 import { sign, verify } from 'jsonwebtoken';
 import Redis from 'ioredis';
 
-type JwtPayload = {
+export type JwtPayload = {
   userId: number;
 };
 

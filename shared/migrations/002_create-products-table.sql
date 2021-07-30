@@ -3,5 +3,5 @@ create table products (
   "ownerId" integer constraint entries_ownerId_foreign references public.users,
   name text not null,
   description text,
-  createdAt date not null default now()
+  "createdAt" date not null default now()
 );

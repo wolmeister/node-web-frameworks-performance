@@ -12,7 +12,8 @@ export const isAuthenticated = handle(async (req, res, next) => {
   const token = authHeader.substring('Bearer '.length);
 
   try {
-    await verifyJwt(token);
+    const payload = await verifyJwt(token);
+    req.authContext = payload;
     next();
   } catch (err) {
     throw new HttpError(StatusCodes.UNAUTHORIZED);
