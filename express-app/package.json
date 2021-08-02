@@ -15,7 +15,8 @@
     "@node-web-frameworks-performance/shared": "workspace:../shared",
     "express": "^4.17.1",
     "http-status-codes": "^2.1.4",
-    "joi": "^17.4.1"
+    "joi": "^17.4.1",
+    "prom-client": "^13.1.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

@@ -17,6 +17,7 @@ importers:
       express: ^4.17.1
       http-status-codes: ^2.1.4
       joi: ^17.4.1
+      prom-client: ^13.1.0
       ts-node-dev: ^1.1.8
       typescript: ^4.3.5
     dependencies:
@@ -24,6 +25,7 @@ importers:
       express: 4.17.1
       http-status-codes: 2.1.4
       joi: 17.4.1
+      prom-client: 13.1.0
     devDependencies:
       '@types/express': 4.17.13
       '@types/node': 16.3.3
@@ -586,6 +588,10 @@ packages:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
     dev: true
+
+  /bintrees/1.0.1:
+    resolution: {integrity: sha1-DmVcm5wkNeqraL9AJyJtK1WjRSQ=}
+    dev: false
 
   /body-parser/1.19.0:
     resolution: {integrity: sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==}
@@ -1622,6 +1628,13 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
+  /prom-client/13.1.0:
+    resolution: {integrity: sha512-jT9VccZCWrJWXdyEtQddCDszYsiuWj5T0ekrPszi/WEegj3IZy6Mm09iOOVM86A4IKMWq8hZkT2dD9MaSe+sng==}
+    engines: {node: '>=10'}
+    dependencies:
+      tdigest: 0.1.1
+    dev: false
+
   /proxy-addr/2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
@@ -1947,6 +1960,12 @@ packages:
     dependencies:
       has-flag: 4.0.0
     dev: true
+
+  /tdigest/0.1.1:
+    resolution: {integrity: sha1-Ljyyw56kSeVdHmzZEReszKRYgCE=}
+    dependencies:
+      bintrees: 1.0.1
+    dev: false
 
   /through2/2.0.5:
     resolution: {integrity: sha512-/mrRod8xqpA+IHSLyGCQ2s8SPHiCDEeQJSep1jqLYeEUClOFG2Qsh+4FU6G9VeqpZnGW/Su8LQGc4YKni5rYSQ==}
