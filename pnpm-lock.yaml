@@ -35,14 +35,18 @@ importers:
 
   fastify-app:
     specifiers:
+      '@node-web-frameworks-performance/shared': workspace:../shared
       '@types/node': ^16.3.3
+      cross-env: ^7.0.3
       fastify: ^3.19.1
       ts-node-dev: ^1.1.8
       typescript: ^4.3.5
     dependencies:
+      '@node-web-frameworks-performance/shared': link:../shared
       fastify: 3.19.1
     devDependencies:
       '@types/node': 16.3.3
+      cross-env: 7.0.3
       ts-node-dev: 1.1.8_typescript@4.3.5
       typescript: 4.3.5
 
