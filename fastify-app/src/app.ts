@@ -3,6 +3,7 @@ import prometheus from 'prom-client';
 import { Schema } from 'joi';
 
 import { authRoutes } from './modules/auth';
+import { userRoutes } from './modules/user';
 
 const app = fastify();
 
@@ -48,5 +49,6 @@ app.get('/health', (req, res) => {
 });
 
 app.register(authRoutes);
+app.register(userRoutes);
 
 export { app };
