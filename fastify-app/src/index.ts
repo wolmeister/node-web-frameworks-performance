@@ -1,18 +1,17 @@
-import fastify from 'fastify';
+import { runMigrations } from '@node-web-frameworks-performance/shared';
+import { app } from './app';
 
-const app = fastify();
+const start = async () => {
+  // Run migrations
+  await runMigrations();
 
-app.get('/health', (req, res) => {
-  res.send({
-    message: 'OK',
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString(),
+  // Start fastify
+  app.listen(3000, (error, address) => {
+    if (error) {
+      throw error;
+    }
+    console.log('Fastify listening on ' + address);
   });
-});
+};
 
-app.listen(3000, (error, address) => {
-  if (error) {
-    throw error;
-  }
-  console.log('Fastify listening on ' + address);
-});
+start();
