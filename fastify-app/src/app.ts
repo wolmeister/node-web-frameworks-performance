@@ -1,7 +1,15 @@
 import fastify from 'fastify';
 import prometheus from 'prom-client';
+import { Schema } from 'joi';
+
+import { authRoutes } from './modules/auth';
 
 const app = fastify();
+
+// Setup joi
+app.setValidatorCompiler<Schema>(({ schema }) => {
+  return (data) => schema.validate(data);
+});
 
 // Setup prometheus
 const prometheusRegister = new prometheus.Registry();
@@ -38,5 +46,7 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+app.register(authRoutes);
 
 export { app };
