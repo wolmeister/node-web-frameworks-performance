@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@node-web-frameworks-performance/shared": "workspace:../shared",
-    "fastify": "^3.19.1"
+    "fastify": "^3.19.1",
+    "prom-client": "^13.1.0"
   },
   "devDependencies": {
     "@types/node": "^16.3.3",
