@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@hapi/hapi": "^20.1.5",
-    "@node-web-frameworks-performance/shared": "workspace:../shared"
+    "@node-web-frameworks-performance/shared": "workspace:../shared",
+    "prom-client": "^13.1.0"
   },
   "devDependencies": {
     "@types/hapi__hapi": "^20.0.9",
