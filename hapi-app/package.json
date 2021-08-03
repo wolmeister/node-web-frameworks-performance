@@ -12,11 +12,13 @@
     "dev": "cross-env PGDATABASE=benchmark-hapi-app ts-node-dev --respawn --transpile-only --clear src/index.ts"
   },
   "dependencies": {
-    "@hapi/hapi": "^20.1.5"
+    "@hapi/hapi": "^20.1.5",
+    "@node-web-frameworks-performance/shared": "workspace:../shared"
   },
   "devDependencies": {
     "@types/hapi__hapi": "^20.0.9",
     "@types/node": "^16.3.3",
+    "cross-env": "^7.0.3",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
   }

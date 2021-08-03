@@ -59,15 +59,19 @@ importers:
   hapi-app:
     specifiers:
       '@hapi/hapi': ^20.1.5
+      '@node-web-frameworks-performance/shared': workspace:../shared
       '@types/hapi__hapi': ^20.0.9
       '@types/node': ^16.3.3
+      cross-env: ^7.0.3
       ts-node-dev: ^1.1.8
       typescript: ^4.3.5
     dependencies:
       '@hapi/hapi': 20.1.5
+      '@node-web-frameworks-performance/shared': link:../shared
     devDependencies:
       '@types/hapi__hapi': 20.0.9
       '@types/node': 16.3.3
+      cross-env: 7.0.3
       ts-node-dev: 1.1.8_typescript@4.3.5
       typescript: 4.3.5
 
