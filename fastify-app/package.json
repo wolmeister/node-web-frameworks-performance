@@ -8,7 +8,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --build",
-    "start": "cross-env PGDATABASE=benchmark-fastify-app node dist/index.js",
+    "start": "cross-env PGDATABASE=benchmark-fastify-app NODE_ENV=production node dist/index.js",
     "dev": "cross-env PGDATABASE=benchmark-fastify-app ts-node-dev --respawn --transpile-only --clear src/index.ts"
   },
   "dependencies": {

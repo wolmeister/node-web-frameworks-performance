@@ -8,8 +8,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc --build",
-    "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only --clear src/index.ts"
+    "start": "cross-env PGDATABASE=benchmark-hapi-app NODE_ENV=production node dist/index.js",
+    "dev": "cross-env PGDATABASE=benchmark-hapi-app ts-node-dev --respawn --transpile-only --clear src/index.ts"
   },
   "dependencies": {
     "@hapi/hapi": "^20.1.5"
