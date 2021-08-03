@@ -1,6 +1,8 @@
 import fastify from 'fastify';
 import prometheus from 'prom-client';
-import { Schema } from 'joi';
+import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import { Schema, ValidationError } from 'joi';
+import { HttpError } from '@node-web-frameworks-performance/shared';
 
 import { authRoutes } from './modules/auth';
 import { userRoutes } from './modules/user';
@@ -52,5 +54,27 @@ app.get('/health', (req, res) => {
 app.register(authRoutes);
 app.register(userRoutes);
 app.register(productRoutes);
+
+// Setup error handling
+app.setErrorHandler((error, request, res) => {
+  if (error instanceof HttpError) {
+    res.status(error.statusCode).send({
+      message: error.message,
+      status: error.statusCode,
+    });
+  } else if (error instanceof ValidationError) {
+    res.status(StatusCodes.BAD_REQUEST).send({
+      message: error.message,
+      status: StatusCodes.BAD_REQUEST,
+      errors: error.details,
+    });
+  } else {
+    console.error(error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+      message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      status: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+});
 
 export { app };
