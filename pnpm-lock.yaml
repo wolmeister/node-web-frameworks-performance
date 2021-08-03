@@ -39,6 +39,7 @@ importers:
       '@types/node': ^16.3.3
       cross-env: ^7.0.3
       fastify: ^3.19.1
+      http-status-codes: ^2.1.4
       joi: ^17.4.1
       prom-client: ^13.1.0
       ts-node-dev: ^1.1.8
@@ -46,6 +47,7 @@ importers:
     dependencies:
       '@node-web-frameworks-performance/shared': link:../shared
       fastify: 3.19.1
+      http-status-codes: 2.1.4
       joi: 17.4.1
       prom-client: 13.1.0
     devDependencies:
