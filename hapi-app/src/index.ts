@@ -1,9 +1,14 @@
 import Hapi from '@hapi/hapi';
+import { runMigrations } from '@node-web-frameworks-performance/shared';
 
 import { jwtPlugin } from './plugins/jwt-plugin';
 import { prometheusPlugin } from './plugins/prometheus-plugin';
 
 const start = async () => {
+  // Run migrations
+  await runMigrations();
+
+  // Create hapi server
   const server = Hapi.server({
     port: 3000,
     host: 'localhost',
