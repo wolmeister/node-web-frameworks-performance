@@ -1,3 +1,5 @@
+import { JwtPayload } from '@node-web-frameworks-performance/shared';
+
 declare module '@hapi/hapi' {
   interface Request {
     /**
@@ -5,6 +7,6 @@ declare module '@hapi/hapi' {
      */
     prometheusTimer: (labels?: { method: string; path: string; code: number }) => number;
   }
-}
 
-export {};
+  interface AuthCredentials extends JwtPayload {}
+}

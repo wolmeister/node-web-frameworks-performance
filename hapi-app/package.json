@@ -12,6 +12,7 @@
     "dev": "cross-env PGDATABASE=benchmark-hapi-app ts-node-dev --respawn --transpile-only --clear src/index.ts"
   },
   "dependencies": {
+    "@hapi/boom": "^9.1.3",
     "@hapi/hapi": "^20.1.5",
     "@node-web-frameworks-performance/shared": "workspace:../shared",
     "prom-client": "^13.1.0"
