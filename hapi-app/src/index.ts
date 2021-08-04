@@ -5,6 +5,7 @@ import { jwtPlugin } from './plugins/jwt-plugin';
 import { prometheusPlugin } from './plugins/prometheus-plugin';
 import { userRoutes } from './modules/user';
 import { authRoutes } from './modules/auth';
+import { productRoutes } from './modules/product';
 
 const start = async () => {
   // Run migrations
@@ -38,6 +39,7 @@ const start = async () => {
 
   server.route(userRoutes);
   server.route(authRoutes);
+  server.route(productRoutes);
 
   await server.start();
   console.log('Server running on ' + server.info.uri);
