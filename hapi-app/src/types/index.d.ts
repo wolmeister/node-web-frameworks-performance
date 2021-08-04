@@ -1,11 +1,16 @@
 import { JwtPayload } from '@node-web-frameworks-performance/shared';
 
 declare module '@hapi/hapi' {
-  interface Request {
+  interface PluginsStates {
     /**
-     * The prometheus timer used to measure request duration.
+     * Prometheus plugin state.
      */
-    prometheusTimer: (labels?: { method: string; path: string; code: number }) => number;
+    prometheus: {
+      /**
+       * The timer used to measure request duration.
+       */
+      requestTimer: (labels?: { method: string; path: string; code: number }) => number;
+    };
   }
 
   interface AuthCredentials extends JwtPayload {}
