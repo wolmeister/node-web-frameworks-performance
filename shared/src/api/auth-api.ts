@@ -1,10 +1,9 @@
 import Joi from 'joi';
 import sql from 'sql-template-strings';
+import Boom from '@hapi/boom';
 import { compare } from 'bcryptjs';
-import { StatusCodes } from 'http-status-codes';
 
 import { dbPool } from '../db';
-import { HttpError } from '../http-error';
 import { blacklistJwt, signJwt } from '../jwt';
 import { User } from './user-api';
 
@@ -45,7 +44,7 @@ async function authenticate(authRequest: AuthRequest): Promise<AuthResponse> {
   const user = userResultSet.rowCount === 1 ? userResultSet.rows[0] : null;
 
   if (!user) {
-    throw new HttpError(StatusCodes.BAD_REQUEST, 'Invalid email');
+    throw Boom.badRequest('Invalid email');
   }
 
   if (await compare(authRequest.password, user.password)) {
@@ -54,7 +53,7 @@ async function authenticate(authRequest: AuthRequest): Promise<AuthResponse> {
     };
   }
 
-  throw new HttpError(StatusCodes.BAD_REQUEST, 'Invalid password');
+  throw Boom.badRequest('Invalid password');
 }
 
 /**

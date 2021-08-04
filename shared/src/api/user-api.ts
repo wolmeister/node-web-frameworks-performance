@@ -1,11 +1,10 @@
-import { DatabaseError } from 'pg';
 import sql from 'sql-template-strings';
 import Joi from 'joi';
+import Boom from '@hapi/boom';
+import { DatabaseError } from 'pg';
 import { hash } from 'bcryptjs';
-import { StatusCodes } from 'http-status-codes';
 
 import { dbPool } from '../db';
-import { HttpError } from '../http-error';
 
 type User = {
   id: number;
@@ -44,14 +43,8 @@ async function addUser(user: NewUser): Promise<User> {
     `);
     return result.rows[0];
   } catch (err) {
-    if (
-      err instanceof DatabaseError &&
-      err.constraint === 'users_email_unique'
-    ) {
-      throw new HttpError(
-        StatusCodes.BAD_REQUEST,
-        'Email has already been taken'
-      );
+    if (err instanceof DatabaseError && err.constraint === 'users_email_unique') {
+      throw Boom.badRequest('Email has already been taken');
     }
     throw err;
   }

@@ -1,8 +1,7 @@
 import fastify from 'fastify';
 import prometheus from 'prom-client';
-import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import Boom from '@hapi/boom';
 import { Schema, ValidationError } from 'joi';
-import { HttpError } from '@node-web-frameworks-performance/shared';
 
 import { authRoutes } from './modules/auth';
 import { userRoutes } from './modules/user';
@@ -57,24 +56,29 @@ app.register(productRoutes);
 
 // Setup error handling
 app.setErrorHandler((error, request, res) => {
-  if (error instanceof HttpError) {
-    res.status(error.statusCode).send({
-      message: error.message,
-      status: error.statusCode,
-    });
-  } else if (error instanceof ValidationError) {
-    res.status(StatusCodes.BAD_REQUEST).send({
-      message: error.message,
-      status: StatusCodes.BAD_REQUEST,
-      errors: error.details,
-    });
-  } else {
-    console.error(error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
-      message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      status: StatusCodes.INTERNAL_SERVER_ERROR,
-    });
+  // Boom error
+  if (Boom.isBoom(error)) {
+    if (error.isServer) {
+      console.error(error);
+    }
+    res.status(error.output.statusCode).send(error.output.payload);
+    return;
   }
+
+  // Validation error
+  if (error instanceof ValidationError) {
+    const boomError = Boom.badRequest('Invalid request data');
+    res.status(boomError.output.statusCode).send({
+      ...boomError.output.payload,
+      validations: error.details,
+    });
+    return;
+  }
+
+  // Internval server error
+  const boomError = Boom.internal();
+  console.error(error);
+  res.status(boomError.output.statusCode).send(boomError.output.payload);
 });
 
 export { app };

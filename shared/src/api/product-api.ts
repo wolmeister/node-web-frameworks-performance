@@ -1,10 +1,8 @@
-import { DatabaseError } from 'pg';
 import sql from 'sql-template-strings';
 import Joi from 'joi';
-import { StatusCodes } from 'http-status-codes';
+import Boom from '@hapi/boom';
 
 import { dbPool } from '../db';
-import { HttpError } from '../http-error';
 import { JwtPayload } from '../jwt';
 
 type Page<T> = {
@@ -88,7 +86,7 @@ async function updateProduct(id: number, product: UpdateProduct, authContext: Jw
   `);
 
   if (existsResult.rowCount === 0) {
-    throw new HttpError(StatusCodes.NOT_FOUND);
+    throw Boom.notFound();
   }
 
   const updateResult = await dbPool.query<Product>(sql`
@@ -103,7 +101,7 @@ async function updateProduct(id: number, product: UpdateProduct, authContext: Jw
   `);
 
   if (updateResult.rowCount === 0) {
-    throw new HttpError(StatusCodes.FORBIDDEN);
+    throw Boom.forbidden();
   }
 
   return updateResult.rows[0];
@@ -123,7 +121,7 @@ async function deleteProduct(id: number, authContext: JwtPayload): Promise<void>
   `);
 
   if (existsResult.rowCount === 0) {
-    throw new HttpError(StatusCodes.NOT_FOUND);
+    throw Boom.notFound();
   }
 
   const deleteResult = await dbPool.query(sql`
@@ -134,7 +132,7 @@ async function deleteProduct(id: number, authContext: JwtPayload): Promise<void>
   `);
 
   if (deleteResult.rowCount === 0) {
-    throw new HttpError(StatusCodes.FORBIDDEN);
+    throw Boom.forbidden();
   }
 }
 
@@ -152,7 +150,7 @@ async function getProduct(id: number): Promise<Product> {
   `);
 
   if (result.rowCount === 0) {
-    throw new HttpError(StatusCodes.NOT_FOUND);
+    throw Boom.notFound();
   }
 
   return result.rows[0];

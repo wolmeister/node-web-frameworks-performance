@@ -1,8 +1,8 @@
 import express, { ErrorRequestHandler } from 'express';
-import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import { ValidationError } from 'joi';
 import prometheus from 'prom-client';
-import { HttpError, runMigrations } from '@node-web-frameworks-performance/shared';
+import Boom from '@hapi/boom';
+import { ValidationError } from 'joi';
+import { runMigrations } from '@node-web-frameworks-performance/shared';
 
 import { handle } from './common/handle-async-middleware';
 import { authRouter } from './modules/auth';
@@ -59,25 +59,30 @@ const start = async () => {
   app.use('/', userRouter);
 
   // Setup error handling
-  const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
-    if (err instanceof HttpError) {
-      res.status(err.statusCode).send({
-        message: err.message,
-        status: err.statusCode,
-      });
-    } else if (err instanceof ValidationError) {
-      res.status(StatusCodes.BAD_REQUEST).send({
-        message: err.message,
-        status: StatusCodes.BAD_REQUEST,
-        errors: err.details,
-      });
-    } else {
-      console.error(err);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-        status: StatusCodes.INTERNAL_SERVER_ERROR,
-      });
+  const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
+    // Boom error
+    if (Boom.isBoom(error)) {
+      if (error.isServer) {
+        console.error(error);
+      }
+      res.status(error.output.statusCode).send(error.output.payload);
+      return;
     }
+
+    // Validation error
+    if (error instanceof ValidationError) {
+      const boomError = Boom.badRequest('Invalid request data');
+      res.status(boomError.output.statusCode).send({
+        ...boomError.output.payload,
+        validations: error.details,
+      });
+      return;
+    }
+
+    // Internval server error
+    const boomError = Boom.internal();
+    console.error(error);
+    res.status(boomError.output.statusCode).send(boomError.output.payload);
   };
 
   app.use(errorHandler);
