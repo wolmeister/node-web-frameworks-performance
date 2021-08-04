@@ -4,6 +4,7 @@ import { runMigrations } from '@node-web-frameworks-performance/shared';
 import { jwtPlugin } from './plugins/jwt-plugin';
 import { prometheusPlugin } from './plugins/prometheus-plugin';
 import { userRoutes } from './modules/user';
+import { authRoutes } from './modules/auth';
 
 const start = async () => {
   // Run migrations
@@ -36,6 +37,7 @@ const start = async () => {
   });
 
   server.route(userRoutes);
+  server.route(authRoutes);
 
   await server.start();
   console.log('Server running on ' + server.info.uri);
