@@ -1,0 +1,18 @@
+{
+  "name": "@node-web-frameworks-performance/benchmark",
+  "author": "Victor Wolmeister",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "node src/index.mjs"
+  },
+  "dependencies": {
+    "autocannon": "^7.4.0",
+    "chalk": "^4.1.2",
+    "got": "^11.8.2",
+    "ora": "^5.4.1"
+  }
+}

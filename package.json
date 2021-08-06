@@ -3,13 +3,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "benchmark": "node benchmark.js",
+    "benchmark": "pnpm --filter @node-web-frameworks-performance/benchmark",
     "express": "pnpm --filter @node-web-frameworks-performance/express-app",
     "fastify": "pnpm --filter @node-web-frameworks-performance/fastify-app",
     "hapi": "pnpm --filter @node-web-frameworks-performance/hapi-app",
     "shared": "pnpm --filter @node-web-frameworks-performance/shared"
-  },
-  "devDependencies": {
-    "autocannon": "^7.4.0"
   }
 }
