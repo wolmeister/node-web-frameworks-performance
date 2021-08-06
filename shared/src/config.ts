@@ -7,11 +7,25 @@ const config = convict({
     default: 'development',
     env: 'NODE_ENV',
   },
+  redis: {
+    host: {
+      doc: 'Redis host',
+      format: String,
+      default: 'localhost',
+      env: 'REDIS_HOST',
+    },
+    port: {
+      doc: 'Database port',
+      format: Number,
+      default: 6379,
+      env: 'REDIS_PORT',
+    },
+  },
   db: {
     host: {
       doc: 'Database host',
       format: String,
-      default: '192.168.0.3',
+      default: 'localhost',
       env: 'PGHOST',
     },
     port: {

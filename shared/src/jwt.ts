@@ -1,6 +1,8 @@
 import { sign, verify } from 'jsonwebtoken';
 import Redis from 'ioredis';
 
+import { config } from './config';
+
 export type JwtPayload = {
   userId: number;
 };
@@ -8,10 +10,9 @@ export type JwtPayload = {
 const JWT_SECRET = '@node-web-frameworks-performance/JWT_SECRET';
 const TOKEN_EXPIRATION = 30;
 
-// @TODO: Add .env
 const redis = new Redis({
-  host: '192.168.0.3',
-  port: 6379,
+  host: config.get('redis.host'),
+  port: config.get('redis.port'),
 });
 
 export function signJwt(payload: JwtPayload) {
