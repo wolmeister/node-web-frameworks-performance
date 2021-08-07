@@ -129,11 +129,11 @@ const putProductResults = await autocannon({
   url: 'http://localhost:3000',
   headers: {
     Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
   },
   requests: [
     {
-      method: 'POST',
-      path: '/products',
+      method: 'PUT',
       setupRequest: (req, context) => ({
         ...req,
         path: `/products/${productIds[Math.floor(Math.random() * productIds.length)]}`,
@@ -172,24 +172,40 @@ spinner.succeed();
 
 // Compute metrics
 console.log(chalk.blue('POST /products'));
-console.log('avg,latency');
+console.log('requestsPerSecond,latency');
 console.log(`${postProductsResults.requests.average},${postProductsResults.latency.average}\n`);
 
 console.log(chalk.blue('GET /products'));
-console.log('avg,latency');
+console.log('requestsPerSecond,latency');
 console.log(`${getProductsResults.requests.average},${getProductsResults.latency.average}\n`);
 
 console.log(chalk.blue('GET /products/:id'));
-console.log('avg,latency');
+console.log('requestsPerSecond,latency');
 console.log(`${getProductResults.requests.average},${getProductResults.latency.average}\n`);
 
 console.log(chalk.blue('PUT /products/:id'));
-console.log('avg,latency');
+console.log('requestsPerSecond,latency');
 console.log(`${putProductResults.requests.average},${putProductResults.latency.average}\n`);
 
 console.log(chalk.blue('DELETE /products/:id'));
-console.log('avg,latency');
+console.log('requestsPerSecond,latency');
 console.log(`${deleteProductResults.requests.average},${deleteProductResults.latency.average}\n`);
+
+const allResults = [
+  postProductsResults,
+  getProductsResults,
+  getProductResults,
+  putProductResults,
+  deleteProductResults,
+];
+const allRequestsPerSecMean =
+  allResults.reduce((sum, result) => result.requests.average + sum, 0) / allResults.length;
+const allRequestsLatencyMean =
+  allResults.reduce((sum, result) => result.latency.average + sum, 0) / allResults.length;
+
+console.log(chalk.blue('All endpoints mean'));
+console.log('requestsPerSecond,latency');
+console.log(`${allRequestsPerSecMean},${allRequestsLatencyMean}\n`);
 
 // End benchmark
 spinner.stop();
